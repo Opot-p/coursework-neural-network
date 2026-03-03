@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль преподавателя - EduPlatform</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Собственные стили -->
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+    <!-- Навигационная панель -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-4" href="../index.html">
+                <span class="text-primary">Edu</span>Platform
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../courses/course-list.html">Курсы</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="../index.html#teachers">Преподаватели</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">О нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Контакты</a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex gap-2">
+                    <a href="../login.html" class="btn btn-outline-primary">Войти</a>
+                    <a href="../register.html" class="btn btn-primary">Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Профиль преподавателя -->
+    <section class="teacher-profile-section py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <!-- Информация о преподавателе -->
+                <div class="col-lg-4">
+                    <div class="teacher-card card shadow-sm">
+                        <div class="card-body text-center">
+                            <img src="https://placehold.co/200x200/4361EE/FFFFFF?text=Иванов" 
+                                 class="rounded-circle mb-4" 
+                                 alt="Преподаватель" style="width: 150px; height: 150px; object-fit: cover;">
+                            
+                            <h3 class="card-title">Иванов Алексей</h3>
+                            <p class="text-muted mb-2">Веб-разработка</p>
+                            
+                            <div class="rating mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <span class="ms-2">(4.9)</span>
+                            </div>
+                            
+                            <div class="teacher-stats">
+                                <div class="row text-center">
+                                    <div class="col-6">
+                                        <strong>25</strong>
+                                        <div class="text-muted small">Курсов</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <strong>1500+</strong>
+                                        <div class="text-muted small">Студентов</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <p class="text-start">
+                                    <strong>Образование:</strong> МГТУ им. Баумана<br>
+                                    <strong>Опыт:</strong> 8 лет в веб-разработке<br>
+                                    <strong>Специализация:</strong> Full-stack разработка
+                                </p>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <a href="#" class="btn btn-primary w-100">
+                                    <i class="fas fa-envelope me-2"></i>
+                                    Написать сообщение
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Курсы преподавателя -->
+                <div class="col-lg-8">
+                    <div class="courses-list">
+                        <h2 class="mb-4">Курсы преподавателя</h2>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="course-card card h-100 shadow-sm">
+                                    <img src="https://placehold.co/400x200/4361EE/FFFFFF?text=Full+Stack+Web" 
+                                         class="card-img-top" alt="Full Stack Web Development">
+                                    <div class="card-body">
+                                        <span class="badge bg-primary mb-2">Программирование</span>
+                                        <h5 class="card-title">Full Stack Web Development</h5>
+                                        <p class="card-text text-secondary">Комплексное изучение веб-разработки от HTML до Node.js</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="text-muted">32 урока</span>
+                                            <span class="text-success fw-bold">Бесплатно</span>
+                                        </div>
+                                        <div class="mt-2">
+                                            <div class="progress" style="height: 5px;">
+                                                <div class="progress-bar bg-success" style="width: 75%"></div>
+                                            </div>
+                                            <small class="text-muted">75% завершено</small>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-0">
+                                        <a href="../courses/course-detail.html" class="btn btn-primary w-100">Перейти к курсу</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="course-card card h-100 shadow-sm">
+                                    <img src="https://placehold.co/400x200/4CC9F0/FFFFFF?text=React+Essential" 
+                                         class="card-img-top" alt="React Essential">
+                                    <div class="card-body">
+                                        <span class="badge bg-success mb-2">Frontend</span>
+                                        <h5 class="card-title">React Essential</h5>
+                                        <p class="card-text text-secondary">Основы разработки современных веб-приложений</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="text-muted">18 урока</span>
+                                            <span class="text-success fw-bold">Бесплатно</span>
+                                        </div>
+                                        <div class="mt-2">
+                                            <div class="progress" style="height: 5px;">
+                                                <div class="progress-bar bg-info" style="width: 45%"></div>
+                                            </div>
+                                            <small class="text-muted">45% завершено</small>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-0">
+                                        <a href="../courses/course-detail.html" class="btn btn-primary w-100">Перейти к курсу</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="course-card card h-100 shadow-sm">
+                                    <img src="https://placehold.co/400x200/F44336/FFFFFF?text=Node.js+API" 
+                                         class="card-img-top" alt="Node.js API Development">
+                                    <div class="card-body">
+                                        <span class="badge bg-warning text-dark mb-2">Backend</span>
+                                        <h5 class="card-title">Node.js API Development</h5>
+                                        <p class="card-text text-secondary">Создание REST API с использованием Node.js и Express</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="text-muted">24 урока</span>
+                                            <span class="text-success fw-bold">Бесплатно</span>
+                                        </div>
+                                        <div class="mt-2">
+                                            <div class="progress" style="height: 5px;">
+                                                <div class="progress-bar bg-warning" style="width: 20%"></div>
+                                            </div>
+                                            <small class="text-muted">20% завершено</small>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-0">
+                                        <a href="../courses/course-detail.html" class="btn btn-primary w-100">Перейти к курсу</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="course-card card h-100 shadow-sm">
+                                    <img src="https://placehold.co/400x200/32CD32/FFFFFF?text=Database+Design" 
+                                         class="card-img-top" alt="Database Design">
+                                    <div class="card-body">
+                                        <span class="badge bg-info mb-2">Базы данных</span>
+                                        <h5 class="card-title">Database Design</h5>
+                                        <p class="card-text text-secondary">Проектирование и оптимизация баз данных</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="text-muted">16 урока</span>
+                                            <span class="text-success fw-bold">Бесплатно</span>
+                                        </div>
+                                        <div class="mt-2">
+                                            <div class="progress" style="height: 5px;">
+                                                <div class="progress-bar bg-danger" style="width: 0%"></div>
+                                            </div>
+                                            <small class="text-muted">Не начат</small>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-0">
+                                        <a href="../courses/course-detail.html" class="btn btn-primary w-100">Перейти к курсу</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5 class="fw-bold mb-3">EduPlatform</h5>
+                    <p class="text-secondary">Современная платформа для онлайн-обучения. Обучайтесь в удобное время и в любом месте.</p>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h6 class="fw-bold mb-3">Курсы</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-secondary text-decoration-none">Веб-разработка</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Дизайн</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Анализ данных</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Маркетинг</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h6 class="fw-bold mb-3">Поддержка</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-secondary text-decoration-none">Помощь</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">FAQ</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Контакты</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Документация</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-3">Подпишитесь на новости</h6>
+                    <p class="text-secondary">Получайте обновления о новых курсах и предложениях</p>
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Ваш email">
+                        <button class="btn btn-primary" type="button">Подписаться</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="text-secondary mb-0">&copy; 2026 EduPlatform. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Собственные скрипты -->
+    <script src="../js/main.js"></script>
+    <script src="../js/utils.js"></script>
+</body>
+</html>
