@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="course-detail">
+    <h2>{{ course.title }}</h2>
+    <p class="course-description">{{ course.description }}</p>
+    
+    <div class="course-info">
+        <p><strong>Преподаватель:</strong> {{ course.teacher.username }}</p>
+        <p><strong>Дата создания:</strong> {{ course.created_at.strftime('%d.%m.%Y') }}</p>
+    </div>
+
+    {% if current_user.is_authenticated %}
+        {% if current_user.role == 'student' %}
+            {% if enrollment %}
+                <div class="enrollment-status">
+                    <p>✅ Вы записаны на этот курс</p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: {{ enrollment.progress }}%"></div>
+                    </div>
+                    <p>Ваш прогресс: {{ enrollment.progress }}%</p>
+                </div>
+            {% else %}
+                <form method="POST" action="{{ url_for('enroll_course', course_id=course.id) }}">
+                    <button type="submit" class="btn btn-primary">Записаться на курс</button>
+                </form>
+            {% endif %}
+        {% elif current_user.role in ['admin', 'teacher'] %}
+            <div class="teacher-controls">
+                <a href="{{ url_for('create_course') }}" class="btn btn-secondary">Редактировать курс</a>
+            </div>
+        {% endif %}
+    {% else %}
+        <p><a href="{{ url_for('login') }}">Войдите</a> чтобы записаться на курс.</p>
+    {% endif %}
+
+    <h3>Уроки курса</h3>
+    <div class="lessons-list">
+        {% for lesson in course.lessons %}
+        <div class="lesson-item">
+            <h4>{{ lesson.order }}. {{ lesson.title }}</h4>
+            <p>{{ lesson.content[:150] }}...</p>
+        </div>
+        {% else %}
+        <p>Уроки пока не добавлены.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
