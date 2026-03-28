@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}EduCRM - Система управления образованием{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="{{ url_for('index') }}" class="logo">📚 EduCRM</a>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Главная</a></li>
+                <li><a href="{{ url_for('courses') }}">Курсы</a></li>
+                {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('dashboard') }}">Кабинет</a></li>
+                    <li><a href="{{ url_for('logout') }}">Выйти ({{ current_user.username }})</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}">Вход</a></li>
+                    <li><a href="{{ url_for('register') }}">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 EduCRM - Система управления онлайн-образованием</p>
+        </div>
+    </footer>
+</body>
+</html>

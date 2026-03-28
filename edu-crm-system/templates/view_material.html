@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="material-detail">
+    <div class="material-header-section">
+        <a href="{{ url_for('view_topic', topic_id=material.topic_id) }}" class="back-link">← Назад к теме</a>
+        
+        <div class="material-type-icon">
+            {% if material.material_type == 'video' %}🎥{% elif material.material_type == 'test' %}📝{% elif material.material_type == 'form' %}📋{% elif material.material_type == 'file' %}📁{% else %}📄{% endif %}
+        </div>
+        
+        <h2>{{ material.title }}</h2>
+        <span class="material-type-badge-large">{{ material.material_type }}</span>
+    </div>
+    
+    <div class="material-content">
+        {% if material.material_type == 'video' %}
+            <div class="video-container">
+                <iframe width="100%" height="400" src="{{ material.content }}" frameborder="0" allowfullscreen></iframe>
+            </div>
+        {% elif material.material_type == 'test' %}
+            <div class="test-container">
+                <h3>📝 Тестовое задание</h3>
+                <div class="test-content">{{ material.content }}</div>
+                <button class="btn btn-primary">Начать тест</button>
+            </div>
+        {% elif material.material_type == 'form' %}
+            <div class="form-container-custom">
+                <h3>📋 Форма</h3>
+                <div class="form-content">{{ material.content }}</div>
+            </div>
+        {% elif material.material_type == 'file' %}
+            <div class="file-container">
+                <h3>📁 Файл</h3>
+                <p>Ссылка на файл: {{ material.content }}</p>
+                <a href="{{ material.content }}" class="btn btn-primary" target="_blank">Скачать/Открыть файл</a>
+            </div>
+        {% else %}
+            <div class="text-content">
+                {{ material.content }}
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="material-navigation">
+        <a href="{{ url_for('view_topic', topic_id=material.topic_id) }}" class="btn btn-secondary">Все материалы темы</a>
+        <a href="{{ url_for('view_course', course_id=material.topic.course.id) }}" class="btn btn-secondary">Курс</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="topic-detail">
+    <div class="topic-header-section">
+        <a href="{{ url_for('view_course', course_id=topic.course_id) }}" class="back-link">← Назад к курсу</a>
+        <h2>{{ topic.order }}. {{ topic.title }}</h2>
+        <p class="topic-description">{{ topic.description }}</p>
+        
+        {% if current_user.role in ['admin', 'teacher'] %}
+        <div class="topic-actions-top">
+            <a href="{{ url_for('add_material', topic_id=topic.id) }}" class="btn btn-primary">➕ Добавить материал</a>
+        </div>
+        {% endif %}
+    </div>
+    
+    <h3 class="section-title">📚 Материалы темы</h3>
+    <div class="materials-list">
+        {% for material in topic.materials %}
+        <div class="material-card">
+            <div class="material-header">
+                <span class="material-icon-large">{% if material.material_type == 'video' %}🎥{% elif material.material_type == 'test' %}📝{% elif material.material_type == 'form' %}📋{% elif material.material_type == 'file' %}📁{% else %}📄{% endif %}</span>
+                <div class="material-info">
+                    <h4>{{ material.title }}</h4>
+                    <span class="material-type-badge">{{ material.material_type }}</span>
+                </div>
+            </div>
+            
+            <div class="material-content-preview">
+                {% if material.material_type == 'video' %}
+                    <p>📹 Видео: {{ material.content[:100] }}...</p>
+                {% elif material.material_type == 'test' %}
+                    <p>📝 Тест: {{ material.content[:100] }}...</p>
+                {% elif material.material_type == 'form' %}
+                    <p>📋 Форма: {{ material.content[:100] }}...</p>
+                {% else %}
+                    <p>{{ material.content[:150] }}...</p>
+                {% endif %}
+            </div>
+            
+            <a href="{{ url_for('view_material', material_id=material.id) }}" class="btn btn-small btn-primary">Открыть материал</a>
+        </div>
+        {% else %}
+        <p class="no-content">Материалы пока не добавлены.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
