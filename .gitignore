@@ -1,2 +1,35 @@
-# No build artifacts, dependencies, or temp files detected in changes
-# Only source/config files present, so no additional ignores needed
+```
+# Logs and temp files
+*.log
+*.tmp
+
+# Database files
+*.db
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Dependencies
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Editors
+.vscode/
+.idea/
+
+# Build artifacts
+dist/
+build/
+target/
+node_modules/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+```

@@ -34,14 +34,25 @@ class Course(db.Model):
     teacher_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    lessons = db.relationship('Lesson', backref='course', lazy=True)
+    topics = db.relationship('Topic', backref='course', lazy=True, cascade='all, delete-orphan')
     enrollments = db.relationship('Enrollment', backref='course', lazy=True)
 
-class Lesson(db.Model):
+class Topic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
-    content = db.Column(db.Text)
+    description = db.Column(db.Text)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
+    order = db.Column(db.Integer, default=0)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    
+    materials = db.relationship('Material', backref='topic', lazy=True, cascade='all, delete-orphan')
+
+class Material(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    material_type = db.Column(db.String(20), nullable=False)  # video, test, form, text, file
+    content = db.Column(db.Text)  # URL для видео, вопросы для теста, HTML для формы
+    topic_id = db.Column(db.Integer, db.ForeignKey('topic.id'), nullable=False)
     order = db.Column(db.Integer, default=0)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -195,6 +206,76 @@ def create_course():
         return redirect(url_for('dashboard'))
     
     return render_template('create_course.html')
+
+@app.route('/course/<int:course_id>/add-topic', methods=['GET', 'POST'])
+@login_required
+def add_topic(course_id):
+    if current_user.role not in ['admin', 'teacher']:
+        flash('У вас нет прав для добавления тем', 'error')
+        return redirect(url_for('index'))
+    
+    course = Course.query.get_or_404(course_id)
+    
+    if request.method == 'POST':
+        title = request.form.get('title')
+        description = request.form.get('description')
+        order = request.form.get('order', 0)
+        
+        topic = Topic(
+            title=title,
+            description=description,
+            course_id=course_id,
+            order=int(order)
+        )
+        db.session.add(topic)
+        db.session.commit()
+        
+        flash('Тема успешно добавлена!', 'success')
+        return redirect(url_for('view_course', course_id=course_id))
+    
+    return render_template('add_topic.html', course=course)
+
+@app.route('/topic/<int:topic_id>/add-material', methods=['GET', 'POST'])
+@login_required
+def add_material(topic_id):
+    if current_user.role not in ['admin', 'teacher']:
+        flash('У вас нет прав для добавления материалов', 'error')
+        return redirect(url_for('index'))
+    
+    topic = Topic.query.get_or_404(topic_id)
+    
+    if request.method == 'POST':
+        title = request.form.get('title')
+        material_type = request.form.get('material_type')
+        content = request.form.get('content')
+        order = request.form.get('order', 0)
+        
+        material = Material(
+            title=title,
+            material_type=material_type,
+            content=content,
+            topic_id=topic_id,
+            order=int(order)
+        )
+        db.session.add(material)
+        db.session.commit()
+        
+        flash('Материал успешно добавлен!', 'success')
+        return redirect(url_for('view_topic', topic_id=topic_id))
+    
+    return render_template('add_material.html', topic=topic)
+
+@app.route('/topic/<int:topic_id>')
+@login_required
+def view_topic(topic_id):
+    topic = Topic.query.get_or_404(topic_id)
+    return render_template('view_topic.html', topic=topic)
+
+@app.route('/material/<int:material_id>')
+@login_required
+def view_material(material_id):
+    material = Material.query.get_or_404(material_id)
+    return render_template('view_material.html', material=material)
 
 # Инициализация БД и создание админа
 def init_db():

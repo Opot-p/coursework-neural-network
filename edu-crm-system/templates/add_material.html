@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h2>➕ Добавить материал в тему "{{ topic.title }}"</h2>
+    
+    <form method="POST" class="auth-form">
+        <div class="form-group">
+            <label for="title">Название материала</label>
+            <input type="text" id="title" name="title" required placeholder="Введите название материала">
+        </div>
+        
+        <div class="form-group">
+            <label for="material_type">Тип материала</label>
+            <select id="material_type" name="material_type" required onchange="toggleContentHelp()">
+                <option value="video">🎥 Видео</option>
+                <option value="test">📝 Тест</option>
+                <option value="form">📋 Форма</option>
+                <option value="text">📄 Текст</option>
+                <option value="file">📁 Файл</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="content">Содержимое</label>
+            <textarea id="content" name="content" rows="6" required placeholder="URL видео, вопросы теста или текст"></textarea>
+            <small id="content-help" class="form-text">Укажите URL видео (YouTube, Vimeo и т.д.)</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="order">Порядковый номер</label>
+            <input type="number" id="order" name="order" value="0" min="0">
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Добавить материал</button>
+            <a href="{{ url_for('view_course', course_id=topic.course_id) }}" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+</div>
+
+<script>
+function toggleContentHelp() {
+    const type = document.getElementById('material_type').value;
+    const helpText = document.getElementById('content-help');
+    
+    if (type === 'video') {
+        helpText.textContent = 'Укажите URL видео (YouTube, Vimeo и т.д.)';
+    } else if (type === 'test') {
+        helpText.textContent = 'Введите вопросы теста в формате JSON или текстом';
+    } else if (type === 'form') {
+        helpText.textContent = 'Введите HTML код формы или описание полей';
+    } else if (type === 'text') {
+        helpText.textContent = 'Введите текстовое содержимое урока';
+    } else if (type === 'file') {
+        helpText.textContent = 'Укажите ссылку на файл или путь к файлу';
+    }
+}
+</script>
+{% endblock %}

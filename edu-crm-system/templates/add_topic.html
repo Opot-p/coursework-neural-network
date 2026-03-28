@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h2>➕ Добавить новую тему в курс "{{ course.title }}"</h2>
+    
+    <form method="POST" class="auth-form">
+        <div class="form-group">
+            <label for="title">Название темы</label>
+            <input type="text" id="title" name="title" required placeholder="Введите название темы">
+        </div>
+        
+        <div class="form-group">
+            <label for="description">Описание темы</label>
+            <textarea id="description" name="description" rows="4" placeholder="Краткое описание темы"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="order">Порядковый номер</label>
+            <input type="number" id="order" name="order" value="0" min="0">
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Добавить тему</button>
+            <a href="{{ url_for('view_course', course_id=course.id) }}" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
